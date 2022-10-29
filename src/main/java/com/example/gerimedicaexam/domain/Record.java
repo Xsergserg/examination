@@ -1,4 +1,4 @@
-package com.example.gerimedicaexam.dto;
+package com.example.gerimedicaexam.domain;
 
 import lombok.*;
 

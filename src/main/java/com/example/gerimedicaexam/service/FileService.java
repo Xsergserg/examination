@@ -1,8 +1,8 @@
-package com.example.gerimedicaexam.domain;
+package com.example.gerimedicaexam.service;
 
 import com.example.gerimedicaexam.repository.RecordsRepository;
 import com.example.gerimedicaexam.utils.IntUtils;
-import com.example.gerimedicaexam.dto.Record;
+import com.example.gerimedicaexam.domain.Record;
 import com.example.gerimedicaexam.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.csv.CSVFormat;

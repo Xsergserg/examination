@@ -1,7 +1,7 @@
 package com.example.gerimedicaexam.controller;
 
-import com.example.gerimedicaexam.domain.FileService;
-import com.example.gerimedicaexam.dto.Record;
+import com.example.gerimedicaexam.service.FileService;
+import com.example.gerimedicaexam.domain.Record;
 import com.example.gerimedicaexam.repository.RecordsRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
