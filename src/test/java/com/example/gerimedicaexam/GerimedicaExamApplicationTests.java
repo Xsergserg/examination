@@ -32,6 +32,27 @@ class GerimedicaExamApplicationTests {
     }
 
     @Test
+    public void shouldReturnError () throws Exception {
+        this.mockMvc.perform(get(PREFIX + "/records/000")).andDo(print()).andExpect(status().is5xxServerError());
+    }
+
+    @Test
+    public void shouldReturnErrorTest () throws Exception {
+        File csvFile = new File("src/main/resources/files/error.test");
+        FileInputStream fileInputStream = new FileInputStream(csvFile);
+        MockMultipartFile file = new MockMultipartFile(
+                "file",
+                csvFile.getName(),
+                MediaType.MULTIPART_FORM_DATA_VALUE,
+                fileInputStream);
+        this.mockMvc.perform(multipart(PREFIX + "/upload").file(file))
+                .andExpect(status().isCreated());
+    }
+    @Test
+    public void shouldReturnFileNonNullError () throws Exception {
+        this.mockMvc.perform(post(PREFIX + "/upload")).andExpect(status().is5xxServerError());
+    }
+    @Test
     @Order(2)
     public void shouldReturnCreated () throws Exception {
         File csvFile = new File("src/main/resources/files/exercise.csv");

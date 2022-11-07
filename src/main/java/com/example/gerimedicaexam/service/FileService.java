@@ -1,5 +1,6 @@
 package com.example.gerimedicaexam.service;
 
+import com.example.gerimedicaexam.error.ParsingException;
 import com.example.gerimedicaexam.repository.RecordsRepository;
 import com.example.gerimedicaexam.utils.IntUtils;
 import com.example.gerimedicaexam.domain.Record;
@@ -20,12 +21,12 @@ import java.util.List;
 public class FileService {
     private final RecordsRepository recordsRepository;
 
-    public void upload(MultipartFile file) {
+    public void upload(MultipartFile file) throws ParsingException {
         List<Record> records = getRecordsFromCsv(file);
         recordsRepository.saveAll(records);
     }
 
-    public static List<Record> getRecordsFromCsv(MultipartFile csvFile) {
+    public static List<Record> getRecordsFromCsv(MultipartFile csvFile) throws ParsingException {
         try (
                 InputStream is = csvFile.getInputStream();
                 BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))
@@ -49,7 +50,7 @@ public class FileService {
                         IntUtils.parseInt(csvRecord.get("sortingPriority"))));
             return records;
         } catch (Exception e) {
-            throw new RuntimeException("Check your CSV file. Parsing error: " + e.getMessage());
+            throw new ParsingException("Check your CSV file. Parsing error: " + e.getMessage());
         }
     }
 }
